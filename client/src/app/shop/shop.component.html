@@ -1,50 +1,68 @@
 <div class="container">
-    <div class="row">
-        <section class="col-3">
-            <h5 class="text-warning ml-3">Sort</h5>
-            <select class="custom-select mb-3">
-                <option selected>Alphabetical</option>
-                <option selected>Price: Low to High</option>
-                <option selected>Price: High to Low</option>
-            </select>
+  <div class="row">
+    <section class="col-3">
+      <h5 class="text-warning ml-3">Sort</h5>
+      <select
+        class="custom-select mb-3"
+        (change)="onSortSelected($event.target.value)"
+      >
+        <option *ngFor="let sort of sortOptions" [value]="sort.value">
+          {{ sort.name }}
+        </option>
+      </select>
 
-            <h5 class="text-warning ml-3">Brands</h5>
-            <ul class="list-group my-3">
-                <li class="list-group-item active">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Morbi leo risus</li>
-                <li class="list-group-item">Porta ac consectetur ac</li>
-                <li class="list-group-item">Vestibulum at eros</li>
-              </ul>
+      <h5 class="text-warning ml-3">Brands</h5>
+      <ul class="list-group my-3">
+        <li
+          class="list-group-item"
+          *ngFor="let brand of brands"
+          [class.active]="brand.id === brandIdSelected"
+          [value]="brand.id"
+          (click)="onBrandSelected(brand.id)"
+        >
+          {{ brand.name }}
+        </li>
+      </ul>
 
-            <h5 class="text-warning ml-3">Types</h5>
-            <ul class="list-group my-3">
-                <li class="list-group-item active">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Morbi leo risus</li>
-                <li class="list-group-item">Porta ac consectetur ac</li>
-                <li class="list-group-item">Vestibulum at eros</li>
-              </ul>
-        </section>
+      <h5 class="text-warning ml-3">Types</h5>
+      <ul class="list-group my-3">
+        <li
+          class="list-group-item"
+          *ngFor="let type of types"
+          [class.active]="type.id == typeIdSelected"
+          [value]="type.id"
+          (click)="onTypeSelected(type.id)"
+        >
+          {{ type.name }}
+        </li>
+      </ul>
+    </section>
 
-        <!-- MainContent -->
-        <section class="col-9">
-            <div class="d-flex justify-content-between align-items-center pb-2">
-                <header>
-                    <span>Showing <strong>10</strong> of <strong>16</strong> Results</span>
-                </header>
-                <div class="form-inline mb-2">
-                    <input type="text" class="form-control mr-2" style="width: 300px;" placeholder="Search">
-                    <button class="btn btn-outline-primary my-2">Search</button>
-                    <button class="btn btn-outline-success my-2 ml-2">Reset</button>
-                </div>
-            </div>
+    <!-- MainContent -->
+    <section class="col-9">
+      <div class="d-flex justify-content-between align-items-center pb-2">
+        <header>
+          <span
+            >Showing <strong>10</strong> of <strong>16</strong> Results</span
+          >
+        </header>
+        <div class="form-inline mb-2">
+          <input
+            type="text"
+            class="form-control mr-2"
+            style="width: 300px;"
+            placeholder="Search"
+          />
+          <button class="btn btn-outline-primary my-2">Search</button>
+          <button class="btn btn-outline-success my-2 ml-2">Reset</button>
+        </div>
+      </div>
 
-            <div class="row">
-                <div class="col-4 mb-4" *ngFor="let product of products">
-                    <app-product-item [product]="product"></app-product-item>
-                </div>
-              </div>
-        </section>
-    </div>
+      <div class="row">
+        <div class="col-4 mb-4" *ngFor="let product of products">
+          <app-product-item [product]="product"></app-product-item>
+        </div>
+      </div>
+    </section>
+  </div>
 </div>
