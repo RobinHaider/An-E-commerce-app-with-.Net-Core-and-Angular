@@ -5,6 +5,7 @@ import { Pagination } from '../shared/models/pagination';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import {map, retry} from 'rxjs/operators';
+import { Product } from '../shared/models/product';
 
 @Injectable({
   providedIn: 'root',
@@ -49,5 +50,9 @@ export class ShopService {
 
   getTypes() {
     return this.http.get<Type[]>(this.baseUrl + 'products/types');
+  }
+
+  getProduct(id: number){
+    return this.http.get<Product>(this.baseUrl + 'products/' + id);
   }
 }
