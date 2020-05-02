@@ -1,7 +1,8 @@
-<div class="container">
+<div class="container mt-3">
   <div class="row">
     <section class="col-3">
-      <h5 class="text-warning ml-3">Sort</h5>
+      <ng-container *ngIf="brands && types">
+      <h5 class="text-warning ml-3 mt-4 mb-3">Sort</h5>
       <select
         class="custom-select mb-3"
         (change)="onSortSelected($event.target.value)"
@@ -36,6 +37,7 @@
           {{ type.name }}
         </li>
       </ul>
+    </ng-container>
     </section>
 
     <!-- MainContent -->
@@ -48,7 +50,7 @@
         >
         </app-paging-header>
 
-        <div class="form-inline mb-2">
+        <div class="form-inline" *ngIf="products">
           <input #search
             (keyup.enter)="onSearch()"
             type="text"
