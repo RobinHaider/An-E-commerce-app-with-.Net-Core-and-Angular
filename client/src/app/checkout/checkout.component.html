@@ -1,3 +1,23 @@
 <div class="container mt-5">
-    <p>checkout works!</p>
+    <div class="row">
+        <div class="col-8">
+            <app-stepper [linearModeSelected]="false" #appStepper>
+                <cdk-step [label]="'Address'">
+                    Step 1
+                </cdk-step>
+                <cdk-step [label]="'Delivery'">
+                    Step 2
+                </cdk-step>
+                <cdk-step [label]="'Review'">
+                    Step 3
+                </cdk-step>
+                <cdk-step [label]="'Payment'">
+                    Step 4
+                </cdk-step>
+            </app-stepper>
+        </div>
+        <div class="col-4">
+            <app-order-totals></app-order-totals>
+        </div>
+    </div>
 </div>
