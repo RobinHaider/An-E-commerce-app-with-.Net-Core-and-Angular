@@ -1,1 +1,12 @@
-<p>checkout-review works!</p>
+<div class="mt-4">
+    <app-basket-summary [isBasket]=false></app-basket-summary>
+</div>
+
+<div class="float-none d-flex justify-content-between flex-column flex-lg-row mb-5">
+    <button class="btn btn-outline-primary" cdkStepperPrevious>
+        <i class="fa fa-angle-left"></i> Back To Delivery
+    </button>
+    <button class="btn btn-primary" cdkStepperNext>
+        Go To Payment <i class="fa fa-angle-right"></i>
+    </button>
+</div>

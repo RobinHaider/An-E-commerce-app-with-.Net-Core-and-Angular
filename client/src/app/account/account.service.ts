@@ -1,3 +1,4 @@
+import { Address } from './../shared/models/address';
 import { User } from './../shared/models/user';
 import { BehaviorSubject, ReplaySubject, of } from 'rxjs';
 import { environment } from './../../environments/environment';
@@ -67,6 +68,14 @@ export class AccountService {
 
   checkEmailExists(email: string){
     return this.http.get(this.baseUrl + 'account/emailexists?email=' + email);
+  }
+
+  getUserAddress(){
+    return this.http.get<Address>(this.baseUrl + 'account/address');
+  }
+
+  updateUserAddress(address: Address){
+    return this.http.put<Address>(this.baseUrl + 'account/address', address);
   }
 
 }
