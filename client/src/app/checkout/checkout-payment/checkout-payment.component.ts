@@ -1,4 +1,4 @@
-import { element } from 'protractor';
+import { element, error } from 'protractor';
 import { IOrder } from './../../shared/models/order';
 import { ToastrService } from 'ngx-toastr';
 import { CheckoutService } from './../checkout.service';
@@ -28,6 +28,9 @@ export class CheckoutPaymentComponent implements AfterViewInit, OnDestroy {
   cardErrors: any;
   cardHandler = this.onChange.bind(this);
   loading = false;
+  cardNumberValid = false;
+  cardExpiryValid = false;
+  cardCvcValid = false;
 
   constructor(
     private basketService: BasketService,
@@ -60,11 +63,22 @@ export class CheckoutPaymentComponent implements AfterViewInit, OnDestroy {
     this.cardCvc.destroy();
   }
 
-  onChange({error}){
-    if(error){
-      this.cardErrors = error.message;
+  onChange(event){
+    if(event.error){
+      this.cardErrors = event.error.message;
     }else {
       this.cardErrors = null;
+    }
+    switch (event.elementType) {
+      case 'cardNumber':
+        this.cardNumberValid = event.complete;
+        break;
+      case 'cardExpiry':
+        this.cardExpiryValid = event.complete;
+        break;
+      case 'cardCvc':
+        this.cardCvcValid = event.complete;
+        break;
     }
   }
 
