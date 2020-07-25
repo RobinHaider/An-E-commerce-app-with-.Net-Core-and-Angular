@@ -45,7 +45,7 @@ namespace Infrastructure.Services
             var subtotal = items.Sum(item => item.Price * item.Quantity);
 
             //check to see if order exists
-            var spec = new OrderWithItemsAndOrderingSpecipication(basket.PaymentIntentId);
+            var spec = new OrderByPaymentIntentWithItemSpecification(basket.PaymentIntentId);
             var existingOrder = await _unitOfWork.Repository<Order>().GetEntityWithSpec(spec);
 
             if (existingOrder != null)
@@ -63,9 +63,6 @@ namespace Infrastructure.Services
             var result = await _unitOfWork.Complete();
 
             if (result <= 0) return null;
-
-            //delete basket
-            await _baseketRepo.DeleteBasketAsync(basketId);
 
             //return order
             return order;
