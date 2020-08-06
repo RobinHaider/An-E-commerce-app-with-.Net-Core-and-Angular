@@ -23,12 +23,8 @@ namespace API
             _config = config;
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureDevelopmentServices(IServiceCollection services)
         {
-            
-            services.AddAutoMapper(typeof(MappingProfiles));
-            services.AddControllers();
             services.AddDbContext<StoreContext>(x =>
             {
                 x.UseSqlite(_config.GetConnectionString("DefaultConnection"));
@@ -38,6 +34,32 @@ namespace API
                 {
                     x.UseSqlite(_config.GetConnectionString("IdentityConnection"));
                 });
+
+            ConfigureServices(services);
+        }
+
+        public void ConfigureProductionServices(IServiceCollection services)
+        {
+            services.AddDbContext<StoreContext>(x =>
+            {
+                x.UseMySql(_config.GetConnectionString("DefaultConnection"));
+            });
+
+            services.AddDbContext<AppIdentityDbContext>(x =>
+                {
+                    x.UseMySql(_config.GetConnectionString("IdentityConnection"));
+                });
+                
+            ConfigureServices(services);
+        }
+
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            
+            services.AddAutoMapper(typeof(MappingProfiles));
+            services.AddControllers();
+            
 
             services.AddSingleton<IConnectionMultiplexer>(c =>
             {
