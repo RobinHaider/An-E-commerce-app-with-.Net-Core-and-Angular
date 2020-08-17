@@ -30,7 +30,7 @@ Angular Re-usable form components
 
 Angular validation and async validation
 
-# Here are some of the things you will learn about in this course:
+# Here are some of the things I learned from this project:
 
 Setting up the developer environment
 
